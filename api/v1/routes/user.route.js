@@ -15,4 +15,6 @@ router.post("/password/reset", controllers.resetPassword);
 
 router.get("/detail", authMiddleware.requireAuth, controllers.detail);
 
+router.get("/list", authMiddleware.requireAuth, controllers.list);
+
 module.exports = router;
