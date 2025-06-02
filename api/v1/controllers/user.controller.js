@@ -94,13 +94,13 @@ module.exports.forgotPassword = async (req, res) => {
       return;
     }
   
-    const otp = generateHelper.generateRandomNumber(8); // Giả định generateHelper được import/định nghĩa
+    const otp = generateHelper.generateRandomNumber(8);  
     const timeExpire = 5; // Tính bằng phút
 
     const objectForgotPassword = {
         email: email,
         otp: otp,
-        expireAt: Date.now()   // Giả định timeExpire là thời gian hết hạn tính bằng phút
+        expireAt: Date.now()  + timeExpire*60*1000 
       };
       
       const forgotPassword = new ForgotPassword(objectForgotPassword);
@@ -186,16 +186,16 @@ module.exports.resetPassword = async (req, res) => {
 
 // [GET] /api/v1/users/detail
 module.exports.detail = async (req, res) => {
-    const token = req.cookies.token;
+    // const token = req.cookies.token;
   
-    const user = await User.findOne({
-      token: token,
-      deleted: false
-    }).select("-password -token");
+    // const user = await User.findOne({
+    //   token: token,
+    //   deleted: false
+    // }).select("-password -token");
   
     res.json({
       code: 200,
       message: "Thành công!",
-      info: user
+      info: req.user
     });
   };
