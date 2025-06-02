@@ -7,6 +7,7 @@ const taskSchema = new mongoose.Schema(
     content: String,
     timeStart: Date,
     timmeFinish: Date,
+    createdBy: String,
     deleted: {
         type: Boolean,
         default: false,
